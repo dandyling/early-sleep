@@ -1,12 +1,14 @@
-import { useState } from "react";
+import star from "./assets/star.png";
 import teddyBear from "./assets/teddy-bear.svg";
 import ducky from "./assets/ducky.webp";
-import hairDryer from "./assets/hair-dryer.png";
-import toothbrush from "./assets/toothbrush.png";
+import hairDryer from "./assets/hair-dryer.webp";
+import toothbrush from "./assets/toothbrush.webp";
 import prayer from "./assets/prayer.webp";
 import storyBook from "./assets/story-book.webp";
 import sleep from "./assets/sleep.webp";
 import "./App.css";
+import { useState } from "react";
+import { cn } from "./lib/utils";
 
 const data: {
   src: string;
@@ -51,28 +53,49 @@ const data: {
 ];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [selectedStars, setSelectedStars] = useState(
+    Array(data.length).fill(false)
+  );
+
+  const handleClick = (i: number) => {
+    const newSelectedStars = [...selectedStars];
+    newSelectedStars[i] = !newSelectedStars[i];
+    setSelectedStars(newSelectedStars);
+  };
 
   return (
-    <>
-      <div>
-        {data.map((item) => (
-          <img src={item.src} alt={item.alt} />
+    <div className="flex flex-col items-center justify-center gap-12 bg-indigo-500 w-screen h-screen p-4">
+      <h1 className="text-white text-4xl font-bold">Eryn's Sleeping Game</h1>
+      <div className="flex items-center gap-4">
+        {data.map((item, i) => (
+          <div
+            key={item.label}
+            className="flex-1 flex flex-col items-center min-h-full h-full gap-4"
+          >
+            <button className="p-0 bg-transparent flex-1 flex items-center justify-center aspect-square">
+              <img
+                src={star}
+                alt={"Star"}
+                className={cn(
+                  "h-full hover:sepia hover:invert-0",
+                  !selectedStars[i] && "invert"
+                )}
+                onClick={() => handleClick(i)}
+              />
+            </button>
+            <button
+              className="flex-[2] flex flex-col items-center min-h-[250px] py-4 px-2 bg-indigo-900 rounded-xl aspect-[1/2]"
+              onClick={() => handleClick(i)}
+            >
+              <div className="flex-1 flex items-center justify-center ">
+                <img src={item.src} alt={item.alt} />
+              </div>
+              <span className="text-pink-300">{item.label}</span>
+            </button>
+          </div>
         ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 
