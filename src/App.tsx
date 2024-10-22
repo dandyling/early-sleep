@@ -6,6 +6,7 @@ import toothbrush from "./assets/toothbrush.webp";
 import prayer from "./assets/prayer.webp";
 import storyBook from "./assets/story-book.webp";
 import sleep from "./assets/sleep.webp";
+import goodJob from "./assets/good-job.mp3";
 import "./App.css";
 import { useState } from "react";
 import { cn } from "./lib/utils";
@@ -52,6 +53,8 @@ const data: {
   },
 ];
 
+const audio = new Audio(goodJob);
+
 function App() {
   const [selectedStars, setSelectedStars] = useState(
     Array(data.length).fill(false)
@@ -61,6 +64,9 @@ function App() {
     const newSelectedStars = [...selectedStars];
     newSelectedStars[i] = !newSelectedStars[i];
     setSelectedStars(newSelectedStars);
+    if (newSelectedStars[i]) {
+      audio.play();
+    }
   };
 
   return (
