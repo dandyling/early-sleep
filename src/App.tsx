@@ -70,8 +70,17 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-12 bg-indigo-500 w-screen h-screen p-4">
+    <div className="flex flex-col items-center justify-center gap-4 bg-indigo-500 w-screen h-screen p-4">
       <h1 className="text-white text-4xl font-bold">Eryn's Sleeping Game</h1>
+      <iframe
+        className="rounded-xl"
+        width="300"
+        src="https://www.youtube.com/embed/44tiZ7IP7zA?si=KRwX8DUEttYfFFA7"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
       <div className="flex items-center gap-4">
         {data.map((item, i) => (
           <div
