@@ -72,7 +72,7 @@ function App() {
             key={item.label}
             className="flex-1 flex flex-col items-center min-h-full h-full gap-4"
           >
-            <button className="p-0 bg-transparent flex-1 flex items-center justify-center aspect-square">
+            <button className="p-0 bg-transparent flex-1 flex items-center justify-center aspect-square min-w-[100px]">
               <img
                 src={star}
                 alt={"Star"}
